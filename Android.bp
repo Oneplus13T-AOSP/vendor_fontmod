@@ -1,0 +1,33 @@
+license {
+    name: "FontMod_license",
+    visibility: [":__subpackages__"],
+    license_kinds: ["SPDX-license-identifier-Apache-2.0"],
+    license_text: ["LICENSE"],
+}
+
+android_app {
+    name: "FontMod",
+    licenses: ["FontMod_license"],
+    manifest: "app/AndroidManifest.xml",
+    srcs: ["app/src/**/*.java"],
+    resource_dirs: ["app/res"],
+    // This module is product_specific and PRODUCT_ENFORCE_PRODUCT_PARTITION_INTERFACE
+    // is true for this product, so it must declare an SDK. It never compiles
+    // against hidden platform APIs: the system font service is reached through
+    // reflection in SystemFontBridge, and Typeface.getFontModDefaultTypeface is
+    // also reflective. UPDATE_FONTS is signature|privileged, so the privileged
+    // allowlist still applies.
+    sdk_version: "system_current",
+    certificate: "platform",
+    privileged: true,
+    product_specific: true,
+    optimize: { enabled: true },
+}
+
+prebuilt_etc {
+    name: "privapp-permissions-dev.fontmod.app.xml",
+    licenses: ["FontMod_license"],
+    src: "permissions/privapp-permissions-dev.fontmod.app.xml",
+    sub_dir: "permissions",
+    product_specific: true,
+}

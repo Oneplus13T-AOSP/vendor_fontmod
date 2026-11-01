@@ -1,0 +1,5 @@
+<permissions>
+    <privapp-permissions package="dev.fontmod.app">
+        <permission name="android.permission.UPDATE_FONTS" />
+    </privapp-permissions>
+</permissions>
